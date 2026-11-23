@@ -1,0 +1,348 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* 防止圖一向上移出時產生多餘捲軸 */
+  cursor: pointer; /* 提示使用者螢幕可點擊 */
+}
+
+/* --- 圖一覆蓋層設定 --- */
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999; /* 確保蓋在所有海景圖層上方 */
+
+  /* 關鍵：讓滑鼠事件（移動視差、hover/點擊小船）直接穿透圖一到下方的海景 */
+  pointer-events: none;
+
+  /* 向上離開的平滑過渡效果（時間與曲線可依手感微調） */
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 觸發向上離開網頁畫面的狀態 */
+.intro-overlay.slide-up {
+  transform: translateY(-100vh);
+}
+
+/* 圖一內部三層的定位與層級 */
+.intro-overlay .wood,
+.intro-overlay .hand,
+.intro-overlay .text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.intro-overlay .wood {
+  z-index: 1;
+}
+.intro-overlay .hand {
+  z-index: 2;
+}
+.intro-overlay .text {
+  z-index: 3;
+}
+
+/* 圖片尺寸與排版（請依實際切圖比例微調） */
+.woodimg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.handimg {
+  width: 120%;
+  height: 120%;
+  object-fit: contain; /* 若手部為局部裁切圖，可改用 position: absolute 調整 right / bottom */
+  display: block;
+  position: absolute;
+  top: -100px;
+  left: 230px;
+  /* 保留你原本的尺寸或定位屬性，並加上這行動畫 */
+  animation: handShake 1.8s ease-in-out infinite alternate;
+  /* 確保動畫以中心或適合的基準點晃動 */
+  transform-origin: center center;
+}
+/* 定義上下左右晃動的動畫 */
+@keyframes handShake {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  25% {
+    transform: translate(10px, -8px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-7px, 9px) rotate(-0.8deg);
+  }
+  75% {
+    transform: translate(6px, 5px) rotate(0.5deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+}
+
+.textimg {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: 10%;
+  /* 可選：加上微微呼吸閃爍效果引導點擊 */
+  animation: pulseText 2s infinite ease-in-out;
+}
+
+@keyframes pulseText {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+.waveimg {
+  width: 120%;
+  max-width: none;
+  margin-left: -10%;
+  display: block;
+  pointer-events: none;
+}
+
+.ocean-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url(../IMG/index_ocean1.png);
+  background-size: cover;
+  overflow: hidden; /* 避免滑鼠移動時畫面外露 */
+  pointer-events: none;
+}
+
+/* 1. 視差容器：只負責 JS 的 transform 移動 */
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+  pointer-events: none;
+}
+
+/* 將 z-index 設定在與 .parallax-layer 同一層級的 div 上 */
+.logo9 {
+  z-index: 9;
+  pointer-events: none;
+}
+.wave4 {
+  z-index: 8;
+  pointer-events: none;
+}
+.wave3 {
+  z-index: 7;
+  pointer-events: none;
+}
+.wave2 {
+  z-index: 6;
+  pointer-events: none;
+}
+
+.wave1 {
+  z-index: 4;
+  pointer-events: none;
+}
+.hor3 {
+  z-index: 3;
+  pointer-events: none;
+}
+.isl2 {
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 內層的 img 維持定位與尺寸設定即可（原本裡面的 z-index 可刪除） */
+.ocean-container .logo9 img {
+  width: 420px;
+  height: 175px;
+  position: absolute;
+  left: calc(50vw - 210px);
+  bottom: 200px;
+  pointer-events: none;
+}
+
+.ocean-container .wave4 img {
+  position: absolute;
+  bottom: 0px;
+  animation: wave4 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave4 {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+
+.ocean-container .wave3 img {
+  position: absolute;
+  bottom: 80px;
+  animation: wave3 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave3 {
+  0% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+.ocean-container .wave2 img {
+  position: absolute;
+  bottom: 160px;
+  animation: wave2 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave2 {
+  0% {
+    transform: translateY(-25px);
+  }
+  100% {
+    transform: translateY(25px);
+  }
+}
+
+.ocean-container .wave1 img {
+  position: absolute;
+  bottom: 240px;
+  animation: wave1 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave1 {
+  0% {
+    transform: translateX(-25px); /* 向左移動 20px */
+  }
+  100% {
+    transform: translateX(25px); /* 向右移動 20px */
+  }
+}
+
+.boat {
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 船與開始圖片的共同容器 */
+.start {
+  position: absolute;
+  width: 270px;
+  height: 350px;
+  left: calc(100vw - 350px);
+  top: 100px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  pointer-events: none;
+}
+
+.st {
+  position: relative;
+  display: block;
+  width: 189px;
+  height: 203px;
+  pointer-events: none;
+}
+
+.st * {
+  pointer-events: none;
+}
+
+body.intro-finished .st,
+body.intro-finished .st * {
+  pointer-events: auto;
+}
+
+/* 船的圖片 */
+.boatimg {
+  width: 189px;
+  height: 203px;
+  display: block;
+  position: relative;
+
+  transform-origin: center bottom;
+  animation: boat 1s ease-in-out infinite alternate;
+  transition: all 0.15s ease;
+}
+
+/* 船的搖晃動畫 */
+@keyframes boat {
+  0% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+/* 開始圖片 */
+.startimg {
+  width: auto;
+  height: auto;
+
+  position: absolute;
+  bottom: calc(100% + 15px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+
+  pointer-events: none;
+}
+
+/* Hover 船時顯示開始圖片 */
+.st:hover .startimg {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 船的互動效果 */
+.boatimg:hover {
+  content: url(../IMG/index_boat_hover.png);
+}
+
+.boatimg:active {
+  content: url(../IMG/index_boat_active.png);
+}
+.ocean-container .hor3 img {
+  position: absolute;
+  top: 200px;
+  pointer-events: none;
+}
+
+.ocean-container .isl2 img {
+  width: 700px;
+  height: 100px;
+  position: absolute;
+  top: 125px;
+  left: calc(50vw - 350px);
+  pointer-events: none;
+}
