@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant-TWn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>遊戲介紹</title>
+    <style>
+      /* 設定全螢幕背景與居中 */
+      body {
+        margin: 0;
+        background-color: #000;
+        height: 100vh;
+        overflow: hidden;
+        position: relative; /* 讓子元素可以使用絕對定位對齊畫面 */
+      }
+
+      /* 滿版影片樣式 */
+      #myVideo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* 「跳過影片」按鈕樣式 */
+      .skip-btn {
+        position: absolute; /* 絕對定位，浮在畫面右上角 */
+        top: 20px;
+        right: 30px;
+        z-index: 10; /* 確保層級高於影片，才能被點擊 */
+        background-color: rgb(17, 9, 77); /* 半透明黑色背景 */
+        color: #fff; /* 白色文字 */
+        border: 1px solid rgba(255, 255, 255, 0.4); /* 微妙的邊框 */
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 30px; /* 圓角按鈕 */
+        cursor: pointer; /* 滑鼠游標變成手指 */
+        transition: background-color 0.3s ease; /* 滑鼠懸停時的漸變效果 */
+      }
+
+      /* 滑鼠移到按鈕上時變亮 */
+      .skip-btn:hover {
+        background-color: rgba(17, 9, 77, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <video id="myVideo" autoplay muted playsinline width="100%">
+      <source src="./IMG/p1_intro.mp4" type="video/mp4" />
+      您的瀏覽器不支援 HTML5 影片標籤。
+    </video>
+    <!-- 跳過按鈕 -->
+    <button class="skip-btn" id="skipBtn">跳過教學 ＞</button>
+
+    <script>
+      const skipBtn = document.getElementById("skipBtn");
+
+      // 點擊按鈕後立即跳轉到下一個 HTML
+      skipBtn.addEventListener("click", function () {
+        window.location.href = "p1.html";
+      });
+    </script>
+    <script>
+      const video = document.getElementById("myVideo");
+
+      video.addEventListener("ended", function () {
+        // 只要填寫同資料夾內的 html 檔名即可
+        window.location.href = "p1.html";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+.boat {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.boat img {
+  display: block;
+  width: 150px;
+  height: auto;
+  animation: boat-float 1.4s ease-in-out infinite alternate;
+}
+
+.loading-text {
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #fff;
+  font-family: "Songti TC", "Noto Serif CJK TC", "PMingLiU", serif;
+  font-size: 24px;
+  line-height: 1.2;
+  text-shadow: 0 1px 4px #17334a;
+  animation: loading-type 2.2s steps(11, end) infinite;
+}
+
+@keyframes boat-float {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes loading-type {
+  from {
+    width: 0;
+  }
+  to {
+    width: 6.7em;
+  }
+}
+/*背景*/
+.waveimg {
+  width: 120%;
+  max-width: none;
+  margin-left: -10%;
+  display: block;
+  pointer-events: none;
+}
+
+.ocean-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url(../IMG/index_ocean1.png);
+  background-size: cover;
+  overflow: hidden; /* 避免滑鼠移動時畫面外露 */
+  pointer-events: none;
+}
+
+/* 1. 視差容器：只負責 JS 的 transform 移動 */
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+  pointer-events: none;
+}
+
+/* 將 z-index 設定在與 .parallax-layer 同一層級的 div 上 */
+
+.wave4 {
+  z-index: 8;
+  pointer-events: none;
+}
+.wave3 {
+  z-index: 7;
+  pointer-events: none;
+}
+.wave2 {
+  z-index: 6;
+  pointer-events: none;
+}
+.wave1 {
+  z-index: 4;
+  pointer-events: none;
+}
+.hor3 {
+  z-index: 3;
+  pointer-events: none;
+}
+.isl2 {
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 內層的 img 維持定位與尺寸設定即可（原本裡面的 z-index 可刪除） */
+
+.ocean-container .wave4 img {
+  position: absolute;
+  bottom: 0px;
+  animation: wave4 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave4 {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+
+.ocean-container .wave3 img {
+  position: absolute;
+  bottom: 150px;
+  animation: wave3 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave3 {
+  0% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+.ocean-container .wave2 img {
+  position: absolute;
+  bottom: 300px;
+  animation: wave2 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave2 {
+  0% {
+    transform: translateY(-25px);
+  }
+  100% {
+    transform: translateY(25px);
+  }
+}
+
+.ocean-container .wave1 img {
+  position: absolute;
+  bottom: 450px;
+  animation: wave1 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave1 {
+  0% {
+    transform: translateX(-25px); /* 向左移動 20px */
+  }
+  100% {
+    transform: translateX(25px); /* 向右移動 20px */
+  }
+}
+
+/* 選項容器設定 */
+.optcontainer {
+  position: absolute;
+  left: calc(50vw - 737px);
+  bottom: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 水平置中（若不需要水平置中可移除） */
+  gap: 100px;
+  z-index: 999;
+}
