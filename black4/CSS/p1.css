@@ -1,0 +1,223 @@
+body {
+  background-image: url(../IMG/p2_bg.png);
+  overflow: hidden;
+}
+.text {
+  position: relative;
+  left: 75%;
+  top: 100px;
+  animation: pulseText 2s infinite ease-in-out;
+}
+
+.textimg {
+  display: inline-block;
+  transform: scale(0.8);
+  transform-origin: top left;
+}
+@keyframes pulseText {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+.application {
+  position: absolute;
+  width: 576px;
+  height: 768px;
+  /*調申請書位置*/
+  left: 8%;
+  top: 10%;
+  transform: rotate(12deg);
+  animation: paperEnter 1.5s ease-out forwards;
+}
+.application img {
+  width: 100%;
+  display: block;
+}
+@keyframes paperEnter {
+  0% {
+    left: -600px;
+    opacity: 0;
+    transform: rotate(-25deg) translateY(-80px);
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 12%;
+    opacity: 1;
+    transform: rotate(12deg) translateY(0);
+  }
+}
+.name-input {
+  position: absolute;
+  /*調暱稱輸入的位置*/
+  right: 8%;
+  top: 39%;
+
+  transform-origin: top center;
+}
+.name-input textarea {
+  width: 50px;
+  height: 300px;
+
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  background: transparent;
+
+  font-family: "標楷體", serif;
+  font-size: 30px;
+  line-height: 1.5;
+  color: #202020;
+
+  padding: 0;
+  margin: 0;
+  text-align: start;
+  vertical-align: top;
+}
+.name-input textarea::placeholder {
+  color: #361a9b;
+  opacity: 1;
+  animation: nicknamePromptBlink 0.9s ease-in-out infinite alternate;
+}
+@keyframes nicknamePromptBlink {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .name-input textarea::placeholder {
+    animation: none;
+  }
+}
+.date-input {
+  position: absolute;
+  /*調日期的位置*/
+  top: 62%;
+  left: 18%;
+
+  color: #202020;
+  font-size: 20px;
+  font-family: "標楷體", serif;
+  font-weight: bold;
+
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+
+  transform-origin: top center;
+
+  white-space: nowrap;
+
+  opacity: 0;
+  animation: dateFadeIn 2s ease-in forwards;
+}
+@keyframes dateFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/*調整月分與日期的間距*/
+.date-gap {
+  display: inline-block;
+  height: 60px;
+}
+.date-day {
+  display: inline-block;
+  position: relative;
+  /*微調日期的位置*/
+  left: -3px;
+}
+/*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/
+/*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/
+/*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/ /*進度條*/
+.flowcont {
+  position: relative;
+  width: 500px;
+  top: calc(100vh - 200px);
+  left: 60%;
+}
+/* 1. 設定容器：隱藏超出範圍的部分，並給予背景色 */
+.flow {
+  width: 100%;
+  max-width: 500px; /* 依照你的版面需求調整寬度 */
+  height: 20px;
+  position: absolute;
+  overflow: hidden; /* 非常重要：把超出容器的圖片切掉 */
+}
+
+/* 2. 設定圖片：讓圖片寬度大於容器，並套用無限循環動畫 */
+.flowimg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200%; /* 讓圖片變寬，確保滾動時不會露出空白 */
+  object-fit: cover;
+  /* 套用動畫：名稱、持續時間、線性播放、無限循環 */
+  animation: waveFlow 10s linear infinite;
+}
+
+/* 3. 定義動畫：讓圖片向左移動一段距離後瞬間重置，形成無限循環 */
+@keyframes waveFlow {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0); /* 剛好移動圖片總寬度的一半 */
+  }
+}
+/* 4. 調整小船位置，讓它完美壓在波浪起點上 */
+.flowboat {
+  position: absolute;
+  top: -15px; /* 往上移動，負值可依你的畫面微調，讓船底剛好貼住波浪 */
+  left: 0;
+  right: calc(100% - 40px);
+  z-index: 2; /* 確保小船圖層在波浪上方 */
+  animation: nextboat 0.5s ease-in-out infinite alternate;
+  transition:
+    left 0.8s ease,
+    right 0.8s ease;
+}
+.flowcont:hover .flowboat {
+  left: calc(100% - 40px);
+  right: 0;
+}
+.flowboatimg {
+  width: 40px;
+  height: 40px;
+}
+.flowtext {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 5px);
+  width: 64px;
+  height: 15px;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.flowcont:hover .flowtext {
+  visibility: visible;
+  opacity: 1;
+}

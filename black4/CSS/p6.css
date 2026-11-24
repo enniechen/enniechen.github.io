@@ -1,0 +1,407 @@
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px); /* 從下方稍微浮上來 */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  animation: pageFadeIn 0.5s ease-out;
+  overflow: hidden;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  box-shadow: inset 0 0 95px 22px rgba(55, 116, 255, 0.72);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease-out;
+}
+
+body.screen-glow::after {
+  opacity: 1;
+}
+.waveimg {
+  width: 120%;
+  max-width: none;
+  margin-left: -10%;
+  display: block;
+  pointer-events: none;
+}
+
+.ocean-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url(../IMG/index_ocean1.png);
+  background-size: cover;
+  overflow: hidden; /* 避免滑鼠移動時畫面外露 */
+  pointer-events: none;
+}
+
+/* 1. 視差容器：只負責 JS 的 transform 移動 */
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+  pointer-events: none;
+}
+
+/* 將 z-index 設定在與 .parallax-layer 同一層級的 div 上 */
+
+.wave4 {
+  z-index: 8;
+  pointer-events: none;
+}
+.swim.parallax-layer {
+  top: 50%;
+  left: 0;
+  display: flex;
+  justify-content: flex-start;
+  z-index: 7;
+  pointer-events: none;
+  animation: swimMove 4s ease-in-out infinite alternate;
+}
+
+@keyframes swimMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw - 260px));
+  }
+}
+
+.swim.parallax-layer > .swim {
+  pointer-events: auto;
+  cursor: pointer;
+}
+.wave3 {
+  z-index: 6;
+  pointer-events: none;
+}
+.wave2 {
+  z-index: 5;
+  pointer-events: none;
+}
+
+.wave1 {
+  z-index: 4;
+  pointer-events: none;
+}
+.hor3 {
+  z-index: 3;
+  pointer-events: none;
+}
+.isl2 {
+  z-index: 2;
+  pointer-events: none;
+}
+
+.isl2.parallax-layer {
+  transition:
+    transform 0.1s ease-out,
+    scale 0.2s ease-out;
+}
+
+.hor3.parallax-layer {
+  transition:
+    transform 0.1s ease-out,
+    scale 0.2s ease-out;
+}
+
+/* 內層的 img 維持定位與尺寸設定即可（原本裡面的 z-index 可刪除） */
+.ocean-container .logo9 img {
+  width: 420px;
+  height: 175px;
+  position: absolute;
+  left: calc(50vw - 210px);
+  bottom: 200px;
+  pointer-events: none;
+}
+
+.ocean-container .wave4 img {
+  position: absolute;
+  bottom: 0px;
+  animation: wave4 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave4 {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+
+.ocean-container .wave3 img {
+  position: absolute;
+  bottom: 80px;
+  animation: wave3 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave3 {
+  0% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+.ocean-container .wave2 img {
+  position: absolute;
+  bottom: 160px;
+  animation: wave2 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave2 {
+  0% {
+    transform: translateY(-25px);
+  }
+  100% {
+    transform: translateY(25px);
+  }
+}
+
+.ocean-container .wave1 img {
+  position: absolute;
+  bottom: 240px;
+  animation: wave1 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave1 {
+  0% {
+    transform: translateX(-25px); /* 向左移動 20px */
+  }
+  100% {
+    transform: translateX(25px); /* 向右移動 20px */
+  }
+}
+.ocean-container .hor3 img {
+  position: absolute;
+  top: 200px;
+  pointer-events: none;
+}
+
+.ocean-container .isl2 img {
+  width: 700px;
+  height: 100px;
+  position: absolute;
+  top: 125px;
+  left: calc(50vw - 350px);
+  pointer-events: none;
+}
+
+.btn {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  box-sizing: border-box;
+  animation: btnMove 4s ease-in-out infinite alternate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 80px;
+  border: #ffffff solid 1px;
+  border-radius: 150px;
+  background-color: #ffffff;
+  z-index: 100;
+  pointer-events: auto;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.btn:hover {
+  border-color: #3774ff;
+}
+
+.btn:active {
+  border-color: #3774ff;
+  background-color: #3774ff;
+}
+
+@keyframes btnMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw - 260px));
+  }
+}
+
+/*游泳的人*/
+.swimimg1 {
+  width: 355px;
+  height: 302px;
+}
+
+.swimimg2 {
+  width: 390px;
+  height: 302px;
+}
+
+.swim.parallax-layer .swimimg2 {
+  display: none;
+}
+
+.swim.parallax-layer.is-pressed .swimimg1 {
+  display: none;
+}
+
+.swim.parallax-layer.is-pressed .swimimg2 {
+  display: block;
+}
+
+.click-count {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 200;
+  color: #ffffff;
+  font-size: 18px;
+  font-family: "Songti TC", "SimSun", serif;
+}
+
+.click-count.count-pulse {
+  animation: countPulse 0.3s ease-out;
+}
+
+@keyframes countPulse {
+  50% {
+    transform: scale(1.15);
+  }
+}
+/*遊戲說明*/
+.rule {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(255, 210, 117, 0.9);
+  z-index: 1000;
+  transition: transform 0.8s ease;
+
+  /* 讓內容水平垂直置中 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.rule.slide-up {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/*繼續航行按鈕*/ /*繼續航行按鈕*/ /*繼續航行按鈕*/ /*繼續航行按鈕*/ /*繼續航行按鈕*/ /*繼續航行按鈕*/
+.nextbtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+.rule > .nextbtn {
+  position: relative;
+  top: auto;
+  transform: none;
+}
+
+.nextbtn.is-visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.next {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+}
+
+.next.is-visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nextboat {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.nextbtn:hover .nextboat {
+  visibility: visible;
+  opacity: 1;
+  animation: nextboat 0.5s ease-in-out infinite alternate;
+}
+@keyframes nextboat {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-15px);
+  }
+}
+
+.countdown {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 300;
+  color: #ffffff;
+  font-size: 18px;
+  font-family: "Songti TC", "SimSun", serif;
+  visibility: hidden;
+}
+
+.countdown.is-visible {
+  visibility: visible;
+}
+.texttop img {
+  width: 463px;
+  height: 53px;
+}
+.textmidd img {
+  transform: scale(0.7);
+}

@@ -1,0 +1,108 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.bg,
+.prize,
+.head {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.bg {
+  z-index: 0;
+}
+
+.bg img,
+.bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prize {
+  z-index: 1;
+}
+
+.prize-art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: scale(0.8);
+  transform-origin: center;
+}
+
+.prize-art > img,
+.head img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.prize-art > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.date,
+#user-name {
+  position: absolute;
+  color: #ffffff;
+  font-family: "Songti TC", "Songti SC", "Noto Serif CJK TC", serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+.date {
+  color: #ffffff;
+  top: 51%;
+  left: 40.7%;
+  display: flex;
+  gap: 32px;
+  font-size: 20px;
+}
+
+#user-name {
+  top: 40%;
+  right: 31%;
+}
+
+.head {
+  position: absolute;
+  inset: auto;
+  top: 17%;
+  left: 16%;
+  display: block;
+  z-index: 2;
+}
+
+.head img {
+  max-width: 100vw;
+  max-height: 100vh;
+  transform: scale(0.55);
+  transform-origin: center;
+}
